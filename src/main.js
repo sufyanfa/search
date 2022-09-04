@@ -6,5 +6,5 @@ import App from './App.vue'
 
 
 
-axios.defaults.baseURL = 'http://localhost:1337';
+axios.defaults.baseURL = 'https://universitygroups.herokuapp.com';
 createApp(App).use(router, axios).mount('#app')
