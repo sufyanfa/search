@@ -59,6 +59,7 @@ const routes = [
   }
 },
   {path: '/:pathMatch(.*)*', name: 'PageNotFound', component: PageNotFound, meta: {
+    middleware: "guest",
     title: `عزام | صفحة غير موجودة`
   }
 },

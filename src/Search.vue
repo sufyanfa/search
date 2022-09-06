@@ -89,7 +89,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody v-if="!glength == 0" class="text-sm divide-y text-right divide-gray-100">
+                        <tbody class="text-sm divide-y text-right divide-gray-100">
                             <tr v-for="gr in groups" :key="gr.id">
                                 <td class="p-2 whitespace-nowrap">
                                     <div>{{gr.attributes.name}}</div>
@@ -110,29 +110,7 @@
                                 </td>
                             </tr>
                         </tbody>
-                        <tbody v-if="glength == 0" class="text-sm divide-y text-right divide-gray-100">
-                            <tr v-for="gr in universityGroups" :key="gr.id">
-                                <td class="p-2 whitespace-nowrap">
-                                    <div>{{gr.data}}</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div>{{gr.attributes.subject.data.attributes.name}}</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div>{{gr.id}}</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="font-medium text-green-500">
-                                        {{universityNmae}}
-                                    </div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div>
-                                        <a class="font-medium text-blue-500 hover:text-blue-700" :href="gr.id">إنظمام</a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
+                        
                     </table>
                 </div>
             </div>
@@ -142,50 +120,7 @@
     <div v-if="select == 2" class="w-full mx-auto my-4">
         <div class="bg-white shadow-lg rounded-sm border border-gray-200">
             <header class="px-5 py-4 border-b border-gray-100">
-                <div class="-mx-3 md:flex mb-2">
-                    <div class="md:w-1/2 px-3 py-2 md:py-0">
-                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
-                            الجامعة
-                        </label>
-                        <div class="relative">
-                            <select v-model="universityID" id="university" name="university" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                <option @click="getCollages()" v-for="university in universities" :key="university.id" :value="university.id">{{university.attributes.name}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="md:w-1/2 px-3">
-                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
-                            الكلية
-                        </label>
-                        <div class="relative">
-                            <select v-model="collageID" id="college" name="college" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                <option v-for="college in colleges" :key="college.id" :value="college.id">{{college.attributes.name}}</option>
-                            </select>
-                        </div>
-                    </div>  
-
-                    <div class="md:w-1/2 px-3">
-                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
-                            القسم
-                        </label>
-                        <div class="relative">
-                            <select v-model="specialtyID" id="specialty" name="specialty" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                <option v-for="specialty in specialties" :key="specialty.id" :value="specialty.id">{{specialty.attributes.name}}</option>
-                            </select>
-                        </div>
-                    </div>  
-                    <div class="md:w-1/2 px-3">
-                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
-                            المقرر
-                        </label>
-                        <div class="relative">
-                            <select v-model="subjectID" id="subject" name="subject" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                <option v-for="subject in subjects" :key="subject.id" :value="subject.id">{{subject.attributes.name}}</option>
-                            </select>
-                        </div>
-                    </div>   
-                </div>
+                
             </header>
             <div class="p-3">
                 <div class="overflow-x-auto">
@@ -219,7 +154,7 @@
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
                                     <div>
-                                        <a :href="gr.attributes.URL">فتح</a>
+                                        <a class="font-medium text-blue-500 hover:text-blue-700" :href="gr.attributes.URL">إنظمام</a>
                                     </div>
                                 </td>
                             </tr>
@@ -290,9 +225,7 @@ export default{
     },
     watch: {
         universityID(value) {
-            this.getCollages(),
-            this.getUniversity()
-
+            this.getCollages()
         },
         collageID(value){
             this.getSpecialties()
@@ -325,14 +258,10 @@ export default{
       axios.get('/api/universities/?populate=*')
         .then((result) => {
             this.universities = result.data.data
-            if(this.universityID >=1){
-                this.getUniversity()
-            }
         })
     },
     getCollages(){
         this.glength = 0
-        this.getUniversity()
             axios({
                 url:`/api/universities/${this.universityID}/?populate=*`,
                 method: 'get',
@@ -359,9 +288,9 @@ export default{
     },
 
     getUniversity(){
-      axios.get(`/api/universities/${this.universityID}/?populate[groups][sort][0]=id%3Aasc`)
+      axios.get(`/api/universities/${this.universityID}/?populate=*`)
         .then((result) => {
-            this.universityGroups = result.data.data.attributes.groups
+            this.universityGroups = result.data.data
             this.universityLength = result.data.data.attributes.groups.data.glength
             this.universityNmae = result.data.data.attributes.name            
         })

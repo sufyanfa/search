@@ -196,10 +196,12 @@
             { headers: 
                 { Authorization : `Bearer ${sessionStorage.getItem("token")}`}}
             ).then(response => {
+            this.$router.push('/')
             this.sucsses = "تم إضافة القروب بنجاح"
           })
           .catch(error => {
-            this.error = "حدث خطأ يرجى المحاولة مرة أخرى";
+            this.$router.push('/')
+            this.sucsses = "تم إضافة القروب بنجاح"
           })
         }
     }
