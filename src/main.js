@@ -5,7 +5,7 @@ import axios from 'axios'
 import App from './App.vue'
 
 
-axios.defaults.baseURL = "https://universitygroups.herokuapp.com";
+axios.defaults.baseURL = 'https://universitygroups.herokuapp.com';
 
 if(sessionStorage.getItem("token")){
     axios.get('/api/users/me',{
@@ -18,5 +18,5 @@ if(sessionStorage.getItem("token")){
     sessionStorage.removeItem("token"),
     router.push("/login")
     })
-}
+};
 createApp(App).use(router, axios).mount('#app')
