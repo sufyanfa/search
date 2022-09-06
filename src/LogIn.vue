@@ -7,8 +7,8 @@
         </p>
       </div>
       <form v-on:submit="handleSubmit" class="max-w-md mx-auto mt-8 mb-0 space-y-4">
-        <div v-if="error">
-            <p class="text-red-500 font-medium my-2 text-center">{{msError}}</p>
+        <div v-if="sucsses">
+            <p class="text-red-500 font-medium my-2 text-center">{{msg}}</p>
         </div>
         <div>
           <label for="identifier" class="sr-only">البريد الإلكتروني</label>
@@ -97,8 +97,8 @@
                 identifier :"",
                 password : ""
             },
-            error : false,
-            msError : "",
+            sucsses : '',
+            msg : '',
             passwordFieldType: "password"
         };
       },
@@ -108,15 +108,18 @@
         },
         handleSubmit: async function(e) {
           e.preventDefault();
-          try {
-            const response = await axios.post('/api/auth/local', this.userData)
+          axios.post('/api/auth/local', this.userData)
+          .then(response => {
             sessionStorage.setItem('token', response.data.jwt)
-            router.push({name:'CreateGroup'})
-          } catch(error) {
-            this.error = true,
-            this.msError = "يرجى التأكد من معلومات الدخول";
-          }
+            this.sucsses = true
+            this.msg = "تم إنشاء الحساب"
+            this.$router.push('/create')
+          })
+          .catch(error => {
+            this.sucsses = false
+            this.msg = "حصل خطأ يرجى المحاولة لاحقا"
+          });
         }
       }
-    };
-    </script>
+};
+</script>

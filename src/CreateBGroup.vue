@@ -40,6 +40,7 @@
                   <label for="Gender" class="mr-2 block text-sm font-medium text-gray-700">الكل</label>
                 </div>
               </div>
+              <p class="text-sm py-1">يرجى التحديد القروب خاص ب</p>
             <div class="-mx-3 md:flex mb-4">
                 <div class="md:w-1/2 px-2 py-2 md:py-0">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
@@ -107,11 +108,12 @@
                 subjectID : 0,
                 groupData: {
                     name: '',
-                    description: '',
+                    URL : '',
+                    Gender : 0,
+                    university : 0,
                     subject: 0,
                     specialty : 0,
                     college : 0,
-                    university : 0
                 },
                 error : '',
                 sucsses : ''
@@ -187,19 +189,19 @@
 
         createBGroup: async function(e) {
             e.preventDefault();
-            try {
-            const groupResult = await axios.post('api/public-groups',
+            axios.post('/api/public-groups',
             {
                 data : this.groupData
             },
             { headers: 
                 { Authorization : `Bearer ${sessionStorage.getItem("token")}`}}
-            )
+            ).then(response => {
             this.sucsses = "تم إضافة القروب بنجاح"
-        } catch(error) {
+          })
+          .catch(error => {
             this.error = "حدث خطأ يرجى المحاولة مرة أخرى";
+          })
         }
-    }
     }
 }
 </script>

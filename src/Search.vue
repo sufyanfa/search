@@ -4,13 +4,15 @@
     <p class="max-w-3xl my-4 mx-auto text-xl text-gray-500">
       الهدف هو تسهيل عملية البحث لمساعدة الطالب في الحصول على المعلومة.
     </p>
-    <div class="mx-auto flex items-center justify-center w-full space-x-2 space-x-reverse">
-      <button @click="getGroups()" class="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-4 rounded-lg flex items-center justify-center w-auto">قروبات المقررات
-        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-      </button>
-      <button @click="getBGroups()" class="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-4 rounded-lg flex items-center justify-center w-auto">قروبات عامة
-        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-      </button>
+    <div class="mx-auto flex flex-col md:space-x-2 md:space-x-reverse space-y-2 space-y-reverse md:space-y-0 md:flex-row md:items-center md:justify-center">
+      <div class="w-full md:w-auto mx-auto flex items-center space-x-2 space-x-reverse mb-2 md:mb-0">
+        <button @click="getGroups()" class="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-4 rounded-lg flex items-center justify-center w-auto">قروبات المقررات
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </button>
+        <button @click="getBGroups()" class="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-4 rounded-lg flex items-center justify-center w-auto">قروبات عامة
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </button>
+      </div>
       <router-link :to="{name :'CreatePage'}" class="bg-pri focus:outline-none focus:ring-2 focus:ring-offset-2 text-sec font-semibold h-12 px-4 rounded-lg flex items-center justify-center w-auto">
         إضافة قروب
         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
@@ -21,7 +23,7 @@
         <div class="bg-white shadow-lg rounded-sm border border-gray-200">
             <header class="px-5 py-4 border-b border-gray-100">
                 <div class="-mx-3 md:flex mb-2">
-                    <div class="md:w-1/2 px-3">
+                    <div class="md:w-1/2 px-3 py-2 md:py-0">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
                             الجامعة
                         </label>
@@ -32,7 +34,7 @@
                         </div>
                     </div>
                     
-                    <div class="md:w-1/2 px-3">
+                    <div class="md:w-1/2 px-3 py-2 md:py-0">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
                             الكلية
                         </label>
@@ -43,7 +45,7 @@
                         </div>
                     </div>  
 
-                    <div class="md:w-1/2 px-3">
+                    <div class="md:w-1/2 px-3 py-2 md:py-0">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
                             القسم
                         </label>
@@ -53,7 +55,7 @@
                             </select>
                         </div>
                     </div>  
-                    <div class="md:w-1/2 px-3">
+                    <div class="md:w-1/2 px-3 py-2 md:py-0">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
                             المقرر
                         </label>
@@ -104,7 +106,6 @@
                                 <td class="p-2 whitespace-nowrap">
                                     <div>
                                         <a class="font-medium text-blue-500 hover:text-blue-700" :href="gr.attributes.url">إنظمام</a>
-                                        <!-- <button @click="openModal">عرض</button> -->
                                     </div>
                                 </td>
                             </tr>
@@ -112,17 +113,17 @@
                         <tbody v-if="glength == 0" class="text-sm divide-y text-right divide-gray-100">
                             <tr v-for="gr in universityGroups" :key="gr.id">
                                 <td class="p-2 whitespace-nowrap">
-                                    <div>{{gr.attributes}}</div>
+                                    <div>{{gr.data}}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div>re</div>
+                                    <div>{{gr.attributes.subject.data.attributes.name}}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div>name</div>
+                                    <div>{{gr.id}}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
                                     <div class="font-medium text-green-500">
-                                        {{gr.id}}
+                                        {{universityNmae}}
                                     </div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
@@ -142,7 +143,7 @@
         <div class="bg-white shadow-lg rounded-sm border border-gray-200">
             <header class="px-5 py-4 border-b border-gray-100">
                 <div class="-mx-3 md:flex mb-2">
-                    <div class="md:w-1/2 px-3">
+                    <div class="md:w-1/2 px-3 py-2 md:py-0">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
                             الجامعة
                         </label>
@@ -360,8 +361,9 @@ export default{
     getUniversity(){
       axios.get(`/api/universities/${this.universityID}/?populate[groups][sort][0]=id%3Aasc`)
         .then((result) => {
-            this.universityGroups = result.data
+            this.universityGroups = result.data.data.attributes.groups
             this.universityLength = result.data.data.attributes.groups.data.glength
+            this.universityNmae = result.data.data.attributes.name            
         })
     },
 

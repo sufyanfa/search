@@ -12,11 +12,6 @@ import LogIn from './LogIn.vue'
 
 import PageNotFound from './PageNotFound.vue'
 
-
-/* Guest */
-
-
-
 const routes = [
   { path: '/', name: 'Welcome', component: Welcome, meta: {
       middleware: "guest",
@@ -71,7 +66,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes
 })
 
