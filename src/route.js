@@ -49,7 +49,7 @@ const routes = [
   },
   {
     path: '/about', name: 'About', component: About, meta: {
-      middleware: "auth",
+      middleware: "guest",
       title:`قروبات الجامعة`
     }
   },

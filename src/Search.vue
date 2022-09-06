@@ -103,7 +103,8 @@
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
                                     <div>
-                                        <a :href="gr.attributes.URL">فتح</a>
+                                        <a class="font-medium text-blue-500 hover:text-blue-700" :href="gr.attributes.url">إنظمام</a>
+                                        <!-- <button @click="openModal">عرض</button> -->
                                     </div>
                                 </td>
                             </tr>
@@ -111,7 +112,7 @@
                         <tbody v-if="glength == 0" class="text-sm divide-y text-right divide-gray-100">
                             <tr v-for="gr in universityGroups" :key="gr.id">
                                 <td class="p-2 whitespace-nowrap">
-                                    <div>{{gr.attributes.id}}</div>
+                                    <div>{{gr.attributes}}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
                                     <div>re</div>
@@ -120,11 +121,13 @@
                                     <div>name</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="font-medium text-green-500">r</div>
+                                    <div class="font-medium text-green-500">
+                                        {{gr.id}}
+                                    </div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
                                     <div>
-                                        <a :href="edk">فتح</a>
+                                        <a class="font-medium text-blue-500 hover:text-blue-700" :href="gr.id">إنظمام</a>
                                     </div>
                                 </td>
                             </tr>
@@ -225,15 +228,16 @@
             </div>
         </div>
     </div>
-
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import ModalDirection from './components/Modal.vue';
 export default{
   data(){
     return{
+      modalOpen: false,
       select : 0,
       groups : [],
       glength : 0,
@@ -255,6 +259,9 @@ export default{
       subjectID : 0
 
     }
+  },
+  components:{
+    ModalDirection
   },
   async mounted() { 
         try {
@@ -294,6 +301,9 @@ export default{
         }
     },
   methods: {
+    openModal() {
+        this.modalOpen = !this.modalOpen;
+    } ,
     getGroups(){
       this.select = 1
       axios.get('/api/groups/?populate=*')
@@ -320,6 +330,8 @@ export default{
         })
     },
     getCollages(){
+        this.glength = 0
+        this.getUniversity()
             axios({
                 url:`/api/universities/${this.universityID}/?populate=*`,
                 method: 'get',
@@ -348,10 +360,8 @@ export default{
     getUniversity(){
       axios.get(`/api/universities/${this.universityID}/?populate[groups][sort][0]=id%3Aasc`)
         .then((result) => {
-            this.universityGroups = result.data.data
-            console.log(this.universityGroups)
+            this.universityGroups = result.data
             this.universityLength = result.data.data.attributes.groups.data.glength
-            this.glength = 0
         })
     },
 
