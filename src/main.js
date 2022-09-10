@@ -5,7 +5,7 @@ import axios from 'axios'
 import App from './App.vue'
 
 
-axios.defaults.baseURL = 'http://localhost:1337/';
+axios.defaults.baseURL = 'https://groupsedu.com/';
 
 if(sessionStorage.getItem("token")){
     axios.get('/api/users/me',{
