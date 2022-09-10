@@ -8,6 +8,9 @@
       </div>
       <form v-on:submit="handleSubmit" class="max-w-md mx-auto mt-8 mb-0 space-y-4">
         <div v-if="sucsses">
+            <p class="text-green-500 font-medium my-2 text-center">{{msg}}</p>
+        </div>
+        <div v-if="error">
             <p class="text-red-500 font-medium my-2 text-center">{{msg}}</p>
         </div>
         <div>
@@ -97,7 +100,8 @@
                 identifier :"",
                 password : ""
             },
-            sucsses : '',
+            sucsses : false,
+            error : false,
             msg : '',
             passwordFieldType: "password"
         };
@@ -112,12 +116,12 @@
           .then(response => {
             sessionStorage.setItem('token', response.data.jwt)
             this.sucsses = true
-            this.msg = "تم إنشاء الحساب"
+            this.msg = "تم التحقق"
             this.$router.push('/create')
           })
           .catch(error => {
-            this.sucsses = false
-            this.msg = "حصل خطأ يرجى المحاولة لاحقا"
+            this.error = true
+            this.msg = "يرجى التحقق من البيانات المدخلة"
           });
         }
       }

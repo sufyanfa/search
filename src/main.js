@@ -5,7 +5,7 @@ import axios from 'axios'
 import App from './App.vue'
 
 
-axios.defaults.baseURL = 'https://universitygroups.herokuapp.com';
+axios.defaults.baseURL = 'http://localhost:1337/';
 
 if(sessionStorage.getItem("token")){
     axios.get('/api/users/me',{

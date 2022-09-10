@@ -42,18 +42,18 @@
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">
                         اسم المقرر
                     </label>
-                    <input v-model="subjectData.name" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4" type="text" placeholder="ادخل اسم المقرر">
+                    <input required v-model="subjectData.name" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4" type="text" placeholder="ادخل اسم المقرر">
                 </div>
                 <div class="md:w-1/2 px-3 py-2 md:py-0">
                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
                     رمز المقرر
                 </label>
-                <input v-model="subjectData.code" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" type="text" placeholder="ادخل رمز المقرر">
+                <input required v-model="subjectData.code" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" type="text" placeholder="ادخل رمز المقرر 373عال-4">
                 </div>
             </div>
             <button type="submit" class="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-4 rounded-lg flex items-center justify-center w-auto">إضافة المقرر</button>
             <p v-if="sucsses" class="text-sm font-normal text-green-500 my-4 text-right md:text-center">{{sucsses}} - 
-            <router-link :to="{name : 'CreatePage'}" class="font-bold">العودة للرئيسية</router-link>
+            <router-link :to="{name : 'Welcome'}" class="font-bold">العودة للرئيسية</router-link>
             </p>
         </form>
     </div>

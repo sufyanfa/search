@@ -1,5 +1,4 @@
 <template>
-
 <div class="px-4 py-16 mx-auto max-w-screen-xl sm:px-6 lg:px-8">
   <div class="max-w-lg mx-auto text-center">
     <h1 class="text-2xl font-bold sm:text-3xl">إنشاء حساب جديد</h1>
@@ -7,8 +6,11 @@
       أهلا بك في <span class="text-pri">قروبات الجامعة</span> عند تسجيلك في الموقع ستكون قادراً على<br> إضافة القروبات
     </p>
   </div>
-  <form v-on:submit="handleSubmit" class="max-w-md mx-auto mt-8 mb-0 space-y-4">
+  <form v-on:submit="handlUser" class="max-w-md mx-auto mt-8 mb-0 space-y-4">
     <div v-if="sucsses">
+        <p class="text-green-500 font-medium my-2 text-center">{{msg}}</p>
+    </div>
+    <div v-if="error">
         <p class="text-red-500 font-medium my-2 text-center">{{msg}}</p>
     </div>
     <div>
@@ -72,6 +74,7 @@
           </svg>
         </span>
       </div>
+      <span class="text-sm p-2 text-gray-500 mt-2">كلمة المرور تحتوي 6 أحرف</span>
     </div>
 
     <div class="flex items-center justify-between">
@@ -99,7 +102,8 @@ export default {
             email :"",
             username : ""
         },
-        sucsses : '',
+        sucsses : false,
+        error : false,
         msg : '',
         passwordFieldType: "password"
     };
@@ -113,19 +117,17 @@ export default {
     switchVisibility() {
       this.passwordFieldType = this.passwordFieldType === "password" ? "text" : "password";
     },
-    handleSubmit: async function(e) {
+    handlUser: async function(e) {
       e.preventDefault();
       axios.post('/api/auth/local/register', this.createUser)
       .then(response => {
-          sessionStorage.setItem('token', response.data.jwt)
           this.sucsses = true
-          this.msg = "تم إنشاء الحساب"
-          this.$router.push('/create')
+          this.msg =  "تم إنشاء الحساب , يرجى تأكيد البريد الإلكتروني من خلال الرسالة المرسلة لبريدك"
         })
         .catch(error => {
-          this.sucsses = false
+          this.error = true
             this.msg = "حصل خطأ يرجى المحاولة لاحقا"
-        });
+        })
     }
   }
 };

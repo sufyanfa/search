@@ -6,296 +6,133 @@
     </p>
     <div class="mx-auto flex flex-col md:space-x-2 md:space-x-reverse space-y-2 space-y-reverse md:space-y-0 md:flex-row md:items-center md:justify-center">
       <div class="w-full md:w-auto mx-auto flex items-center space-x-2 space-x-reverse mb-2 md:mb-0">
-        <button @click="getGroups()" class="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-4 rounded-lg flex items-center justify-center w-auto">قروبات المقررات
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        <button @click="select = true" class="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-4 rounded-lg flex items-center justify-center w-auto">
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            قروبات المقررات
         </button>
-        <button @click="getBGroups()" class="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-4 rounded-lg flex items-center justify-center w-auto">قروبات عامة
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        <button @click="select = false" class="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-4 rounded-lg flex items-center justify-center w-auto">
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            قروبات عامة
         </button>
       </div>
       <router-link :to="{name :'CreatePage'}" class="bg-pri focus:outline-none focus:ring-2 focus:ring-offset-2 text-sec font-semibold h-12 px-4 rounded-lg flex items-center justify-center w-auto">
+        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
         إضافة قروب
-        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
       </router-link>
     </div>
-
-    <div v-if="select == 1" class="w-full mx-auto my-4">
-        <div class="bg-white shadow-lg rounded-sm border border-gray-200">
-            <header class="px-5 py-4 border-b border-gray-100">
-                <div class="-mx-3 md:flex mb-2">
-                    <div class="md:w-1/2 px-3 py-2 md:py-0">
-                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
-                            الجامعة
-                        </label>
-                        <div class="relative">
-                            <select v-model="universityID" id="university" name="university" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                <option @click="getCollages()" v-for="university in universities" :key="university.id" :value="university.id">{{university.attributes.name}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="md:w-1/2 px-3 py-2 md:py-0">
-                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
-                            الكلية
-                        </label>
-                        <div class="relative">
-                            <select v-model="collageID" id="college" name="college" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                <option v-for="college in colleges" :key="college.id" :value="college.id">{{college.attributes.name}}</option>
-                            </select>
-                        </div>
-                    </div>  
-
-                    <div class="md:w-1/2 px-3 py-2 md:py-0">
-                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
-                            القسم
-                        </label>
-                        <div class="relative">
-                            <select v-model="specialtyID" id="specialty" name="specialty" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                <option v-for="specialty in specialties" :key="specialty.id" :value="specialty.id">{{specialty.attributes.name}}</option>
-                            </select>
-                        </div>
-                    </div>  
-                    <div class="md:w-1/2 px-3 py-2 md:py-0">
-                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
-                            المقرر
-                        </label>
-                        <div class="relative">
-                            <select v-model="subjectID" id="subject" name="subject" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                <option v-for="subject in subjects" :key="subject.id" :value="subject.id">{{subject.attributes.name}}</option>
-                            </select>
-                        </div>
-                    </div>   
-                </div>
-            </header>
-            <div class="p-3">
-                <div class="overflow-x-auto">
-                    <table class="table-auto w-full">
-                        <thead class="text-xs text-right font-semibold text-gray-400 bg-gray-50">
-                            <tr>
-                                <th class="p-2 whitespace-nowrap">
-                                    <div>اسم القروب</div>
-                                </th>
-                                <th class="p-2 whitespace-nowrap">
-                                    <div> المقرر</div>
-                                </th>
-                                <th class="p-2 whitespace-nowrap">
-                                    <div>متاح للـ</div>
-                                </th>
-                                <th class="p-2 whitespace-nowrap">
-                                    <div>الجامعة</div>
-                                </th>
-                                <th class="p-2 whitespace-nowrap">
-                                    <div>معلومات</div>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-sm divide-y text-right divide-gray-100">
-                            <tr v-for="gr in groups" :key="gr.id">
-                                <td class="p-2 whitespace-nowrap">
-                                    <div>{{gr.attributes.name}}</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div>{{gr.attributes.subject.data.attributes.name}}</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div>{{gr.attributes.Gender}}</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="font-medium text-green-500">{{gr.attributes.university.data.attributes.name}}</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div>
-                                        <a class="font-medium text-blue-500 hover:text-blue-700" :href="gr.attributes.url">إنظمام</a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                        
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div v-if="select == 2" class="w-full mx-auto my-4">
-        <div class="bg-white shadow-lg rounded-sm border border-gray-200">
-            <header class="px-5 py-4 border-b border-gray-100">
-                
-            </header>
-            <div class="p-3">
-                <div class="overflow-x-auto">
-                    <table class="table-auto w-full">
-                        <thead class="text-xs text-right font-semibold text-gray-400 bg-gray-50">
-                            <tr>
-                                <th class="p-2 whitespace-nowrap">
-                                    <div>اسم القروب</div>
-                                </th>
-                                <th class="p-2 whitespace-nowrap">
-                                    <div>متاح للـ</div>
-                                </th>
-                                <th class="p-2 whitespace-nowrap">
-                                    <div>الجامعة</div>
-                                </th>
-                                <th class="p-2 whitespace-nowrap">
-                                    <div>معلومات</div>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-sm divide-y text-right divide-gray-100">
-                            <tr v-for="gr in bgroups" :key="gr.id">
-                                <td class="p-2 whitespace-nowrap">
-                                    <div>{{gr.attributes.name}}</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div>{{gr.attributes.Gender}}</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="font-medium text-green-500">{{gr.attributes.university.data.attributes.name}}</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div>
-                                        <a class="font-medium text-blue-500 hover:text-blue-700" :href="gr.attributes.URL">إنظمام</a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+    <Groups v-if="select" :groups="groups" />
+    <public-groups v-if="!select" :publicGroups="publicGroups" />
+    
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 import ModalDirection from './components/Modal.vue';
+import Groups from './components/Groups.vue'
+import PublicGroups from './components/PublicGroups.vue';
 export default{
   data(){
     return{
-      modalOpen: false,
-      select : 0,
-      groups : [],
-      glength : 0,
+      select : true,
       universities : [],
-      universityID : 0,
-      universityNmae : '',
-      universityGroups : [],
-      universityLength : 0,
-      univlength : 0,
-      bglength : 0,
-      bgroups : [],
-
-      colleges : [],
-      specialties : [],
-      subjects :[],
-
-      collageID : 0,
-      specialtyID : 0,
-      subjectID : 0
-
+      groups : [],
+      publicGroups : [],
     }
   },
-  components:{
-    ModalDirection
-  },
-  async mounted() { 
+components:{
+    ModalDirection,
+    Groups,
+    PublicGroups
+},
+    mounted() { 
+        this.getPublicGroups()
+    },
+  methods: {
+    async getPublicGroups(){
         try {
             const response = await axios({
             url: 'graphql',
             method: 'post',
             data: {
                 query: `
-                query {
-                    universities {
-                        data {
-                        id
-                        attributes {
-                            name
+                              query {
+                universities {
+                    data {
+                    id
+                    attributes {
+                        name
+                      groups{
+                        data{
+                          attributes{
+                            name,gender,url,division
+                            subject{
+                              data{
+                                attributes{
+                                  name
+                                }
+                              }
+                            }
+                            university{
+                              data{
+                                attributes{
+                                  name
+                                }
+                              }
+                            }
+                          }
                         }
+                      }
+                      public_groups{
+                        data{
+                          attributes{
+                            name,gender,url
+                            university{
+                              data{
+                                attributes{
+                                  name
+                                }
+                              }
+                            }
+                            college{
+                              data{
+                                attributes{
+                                  name
+                                }
+                              }
+                            }
+                            specialty{
+                              data{
+                                attributes{
+                                  name
+                                }
+                              }
+                            }
+                            subject{
+                              data{
+                                attributes{
+                                  name
+                                }
+                              }
+                            }
+                          }
                         }
+                      }
                     }
-                }`
+                    }
+                }
+              }`
             }
         })
+
         this.universities = response.data.data.universities.data
+        this.groups= response.data.data.universities.data[0].attributes.groups.data
+        this.publicGroups = response.data.data.universities.data[0].attributes.public_groups.data
+
         } catch (error) {
             this.error = error;
         }
-    },
-    watch: {
-        universityID(value) {
-            this.getCollages()
-        },
-        collageID(value){
-            this.getSpecialties()
-        },
-        specialtyID(value){
-            this.getSubjects()
-        }
-    },
-  methods: {
-    openModal() {
-        this.modalOpen = !this.modalOpen;
-    } ,
-    getGroups(){
-      this.select = 1
-      axios.get('/api/groups/?populate=*')
-            .then((result) => {
-                this.groups = result.data.data
-                this.glength = result.data.meta.pagination.total
-            })
-    },
-    getBGroups(){
-      this.select = 2,
-      axios.get('/api/public-groups/?populate=*')
-      .then((result) => {
-        this.bgroups = result.data.data
-        this.bglength = result.data.meta.pagination.total
-      })
-    },
-    getUniversites(){
-      axios.get('/api/universities/?populate=*')
-        .then((result) => {
-            this.universities = result.data.data
-        })
-    },
-    getCollages(){
-        this.glength = 0
-            axios({
-                url:`/api/universities/${this.universityID}/?populate=*`,
-                method: 'get',
-            }).then((result) => {
-                this.colleges = result.data.data.attributes.colleges.data
-            })
-    },
-    getSpecialties(){
-        axios({
-            url:`/api/colleges/${this.collageID}/?populate=*`,
-            method: 'get',
-        }).then((result) => {
-            this.specialties = result.data.data.attributes.specialties.data
-        })
-    },
-    getSubjects(){
-        axios({
-            url:`/api/specialties/${this.specialtyID}/?populate=*`,
-            method: 'get',
-        }).then((result) => {
-            this.subjects = result.data.data.attributes.subjects.data
-            this.subject = this.subjectID
-        })
-    },
-
-    getUniversity(){
-      axios.get(`/api/universities/${this.universityID}/?populate=*`)
-        .then((result) => {
-            this.universityGroups = result.data.data
-            this.universityLength = result.data.data.attributes.groups.data.glength
-            this.universityNmae = result.data.data.attributes.name            
-        })
-    },
-
+    }
   }
 }
 </script>

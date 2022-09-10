@@ -22,21 +22,21 @@
                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-password">
                     رابط القروب
                 </label>
-                <input required v-model="groupData.URL" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="grid-password" type="text" placeholder="ألصق رابط القروب">
+                <input required v-model="groupData.url" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="grid-password" type="text" placeholder="ألصق رابط القروب">
                 </div>
             </div>
             <p class="text-xs font-bold mb-2">القروب متاح لل</p>
               <div class="flex items-center space-x-4 space-x-reverse w-full mb-4">
                 <div class="flex items-center">
-                  <input required v-model="groupData.Gender" name="Gender" value="Male" type="radio" class="h-4 w-4 border-gray-300 text-sec focus:ring-sec">
+                  <input required v-model="groupData.gender" name="Gender" value="Male" type="radio" class="h-4 w-4 border-gray-300 text-sec focus:ring-sec">
                   <label for="Gender" class="mr-2 block text-sm font-medium text-gray-700">شباب</label>
                 </div>
                 <div class="flex items-center">
-                  <input v-model="groupData.Gender" name="Gender" value="Female" type="radio" class="h-4 w-4 border-gray-300 text-sec focus:ring-sec">
+                  <input v-model="groupData.gender" name="Gender" value="Female" type="radio" class="h-4 w-4 border-gray-300 text-sec focus:ring-sec">
                   <label for="Gender" class="mr-2 block text-sm font-medium text-gray-700">بنات</label>
                 </div>
                 <div class="flex items-center">
-                  <input v-model="groupData.Gender" name="Gender" value="Male/Female" type="radio" class="h-4 w-4 border-gray-300 text-sec focus:ring-sec">
+                  <input v-model="groupData.gender" name="Gender" value="Male/Female" type="radio" class="h-4 w-4 border-gray-300 text-sec focus:ring-sec">
                   <label for="Gender" class="mr-2 block text-sm font-medium text-gray-700">الكل</label>
                 </div>
               </div>
@@ -87,8 +87,10 @@
             </div>
 
             <button type="submit" class="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-4 rounded-lg flex items-center justify-center w-auto">إضافة القروب</button>
-            <p v-if="sucsses" class="text-sm font-normal text-green-500 my-4 text-right md:text-center">{{sucsses}} - 
-                <router-link :to="{name : 'CreatePage'}" class="font-bold">العودة للرئيسية</router-link>
+            <p v-if="sucsses" class="text-sm font-normal text-green-500 my-4 text-right md:text-center">{{msg}} - 
+                <router-link :to="{name : 'Welcome'}" class="font-bold">العودة للرئيسية</router-link>
+            </p>
+            <p v-if="error" class="text-sm font-normal text-red-500 my-4 text-right md:text-center">{{msg}} - 
             </p>
         </form>
     </div>
@@ -102,21 +104,24 @@
                 colleges : [],
                 specialties : [],
                 subjects : [],
+
                 universityID : 0,
                 collageID :0,
                 specialtyID :0,
                 subjectID : 0,
+
                 groupData: {
                     name: '',
-                    URL : '',
-                    Gender : 0,
-                    university : 0,
-                    subject: 0,
-                    specialty : 0,
-                    college : 0,
+                    url : '',
+                    gender : 0,
+                    university : [],
+                    subject: [],
+                    specialty : [],
+                    college : [],
                 },
-                error : '',
-                sucsses : ''
+                error : false,
+                sucsses : false,
+                msg : ''
             }
         },
         watch: {
@@ -189,20 +194,21 @@
 
         createBGroup: async function(e) {
             e.preventDefault();
-            axios.post('/api/public-groups',
+        try {
+            const groupResult = await axios.post('/api/public-groups',
             {
                 data : this.groupData
             },
             { headers: 
                 { Authorization : `Bearer ${sessionStorage.getItem("token")}`}}
-            ).then(response => {
-            this.$router.push('/')
-            this.sucsses = "تم إضافة القروب بنجاح"
-          })
-          .catch(error => {
-            this.$router.push('/')
-            this.sucsses = "تم إضافة القروب بنجاح"
-          })
+            )
+            this.sucsses = true,
+            this.msg = "تم إضافة القروب بنجاح"
+
+        } catch(error) {
+            this.error = true
+            this.msg = "حدث خطأ يرجى المحاولة مرة أخرى";
+        }
         }
     }
 }

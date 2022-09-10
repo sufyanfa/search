@@ -59,9 +59,9 @@
                 </div>
                 <div class="md:w-1/2 px-3">
                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
-                    رمز الشعبة
+                    رقم الشعبة
                 </label>
-                <input required v-model="groupData.code" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" type="tel" placeholder="ادخل رقم الشعبة">
+                <input required v-model="groupData.division" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" type="tel" placeholder="ادخل رقم الشعبة">
                 </div>
             </div>
             <div class="-mx-3 md:flex mb-4">
@@ -75,21 +75,23 @@
             <p class="text-xs font-bold mb-2">القروب متاح لل</p>
             <div class="flex items-center space-x-4 space-x-reverse w-full mb-4">
             <div class="flex items-center">
-                <input required v-model="groupData.Gender" name="Gender" value="Male" type="radio" class="h-4 w-4 border-gray-300 text-sec focus:ring-sec">
+                <input required v-model="groupData.gender" name="Gender" value="Male" type="radio" class="h-4 w-4 border-gray-300 text-sec focus:ring-sec">
                 <label for="Gender" class="mr-2 block text-sm font-medium text-gray-700">شباب</label>
             </div>
             <div class="flex items-center">
-                <input v-model="groupData.Gender" name="Gender" value="Female" type="radio" class="h-4 w-4 border-gray-300 text-sec focus:ring-sec">
+                <input v-model="groupData.gender" name="Gender" value="Female" type="radio" class="h-4 w-4 border-gray-300 text-sec focus:ring-sec">
                 <label for="Gender" class="mr-2 block text-sm font-medium text-gray-700">بنات</label>
             </div>
             <div class="flex items-center">
-                <input v-model="groupData.Gender" name="Gender" value="Male/Female" type="radio" class="h-4 w-4 border-gray-300 text-sec focus:ring-sec">
+                <input v-model="groupData.gender" name="Gender" value="Male/Female" type="radio" class="h-4 w-4 border-gray-300 text-sec focus:ring-sec">
                 <label for="Gender" class="mr-2 block text-sm font-medium text-gray-700">الكل</label>
             </div>
             </div>
             <button type="submit" class="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-4 rounded-lg flex items-center justify-center w-auto">إضافة القروب</button>
-            <p v-if="sucsses" class="text-sm font-normal text-green-500 my-4 text-right md:text-center">{{sucsses}} - 
-            <router-link :to="{name : 'CreatePage'}" class="font-bold">العودة للرئيسية</router-link>
+            <p v-if="sucsses" class="text-sm font-normal text-green-500 my-4 text-right md:text-center">{{msg}} - 
+                <router-link :to="{name : 'Welcome'}" class="font-bold">العودة للرئيسية</router-link>
+            </p>
+            <p v-if="error" class="text-sm font-normal text-red-500 my-4 text-right md:text-center">{{msg}} - 
             </p>
         </form>
     </div>
@@ -111,14 +113,15 @@
 
                 groupData: {
                     name: '',
-                    description: '',
                     url : '',
+                    division : '',
                     subject: 0,
                     university : 0,
-                    Gender : 0
+                    gender : 0
                 },
-                error : '',
-                sucsses : ''
+                error : false,
+                sucsses : false,
+                msg : ''
             }
         },
         watch: {
@@ -194,9 +197,11 @@
             { headers: 
                 { Authorization : `Bearer ${sessionStorage.getItem("token")}`}}
             )
-            this.sucsses = "تم إضافة القروب بنجاح"
+            this.sucsses = true,
+            this.msg = "تم إضافة القروب بنجاح"
         } catch(error) {
-            this.error = "حدث خطأ يرجى المحاولة مرة أخرى";
+            this.error = true
+            this.msg = "حدث خطأ يرجى المحاولة مرة أخرى";
         }
     }
     }
