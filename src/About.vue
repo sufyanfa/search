@@ -1,5 +1,5 @@
 <template>
-    <div id="team" class="section relative pt-20 pb-8 md:pt-16 bg-white dark:bg-gray-800">
+    <div id="team" class="section relative pt-20 pb-8 md:pt-16 bg-white">
     <div class="container xl:max-w-6xl mx-auto px-4">
         <div class="text-center mx-auto mb-12">
           <div class="mb-8">
