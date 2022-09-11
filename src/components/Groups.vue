@@ -28,15 +28,15 @@
                                 <th class="p-2 whitespace-nowrap">
                                     <div>الجامعة</div>
                                 </th>
-                                <th class="p-2 whitespace-nowrap">
-                                    <div>معلومات</div>
-                                </th>
+    
                             </tr>
                         </thead>
                         <tbody class="text-sm divide-y text-right divide-gray-100">
-                            <tr v-for="group in filteredGroups" :key="group.id">
+                            <tr class="cursor-pointer" v-for="group in filteredGroups" :key="group.id">
                                 <td class="p-2 whitespace-nowrap">
-                                    <div>{{group.attributes.name}}</div>
+                                    <a class="font-medium text-blue-500 hover:text-blue-700" :href="group.attributes.url">
+                                        {{group.attributes.name}}
+                                    </a>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
                                     <div>{{group.attributes.subject.data ? group.attributes.subject.data.attributes.name : "-"}}</div>
@@ -49,11 +49,6 @@
                                 <td class="p-2 whitespace-nowrap">
                                     <div class="font-medium text-green-500">
                                         {{group.attributes.university.data.attributes.name}}
-                                    </div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div>
-                                        <a class="font-medium text-blue-500 hover:text-blue-700" :href="group.attributes.url">إنضمام</a>
                                     </div>
                                 </td>
                             </tr>
@@ -85,6 +80,12 @@ export default {
         return group.attributes.division.toLowerCase().includes(this.search.toLowerCase())
       })
       
+    }
+  },
+  methods : {
+    select: function(event) {
+        console.log("d")
+        window.location.href = group.attributes.url
     }
   }
 }

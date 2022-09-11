@@ -23,15 +23,14 @@
                                 <th class="p-2 whitespace-nowrap">
                                     <div>الجامعة</div>
                                 </th>
-                                <th class="p-2 whitespace-nowrap">
-                                    <div>معلومات</div>
-                                </th>
                             </tr>
                         </thead>
                         <tbody class="text-sm divide-y text-right divide-gray-100">
                             <tr v-for="group in filteredPublicGroups" :key="group.id">
                                 <td class="p-2 whitespace-nowrap">
-                                    <div>{{group.attributes.name}}</div>
+                                    <a class="font-medium text-blue-500 hover:text-blue-700" :href="group.attributes.url">
+                                        {{group.attributes.name}}
+                                    </a>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
                                     <div v-if="group.attributes.gender == 'Male'">شباب</div>
@@ -40,11 +39,6 @@
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
                                     <div class="font-medium text-green-500">{{group.attributes.university.data.attributes.name}}</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div>
-                                        <a class="font-medium text-blue-500 hover:text-blue-700" :href="group.attributes.url">إنضمام</a>
-                                    </div>
                                 </td>
                             </tr>
 

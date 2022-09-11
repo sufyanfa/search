@@ -51,10 +51,13 @@
                 <input required v-model="subjectData.code" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" type="text" placeholder="ادخل رمز المقرر 373عال-4">
                 </div>
             </div>
-            <button type="submit" class="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-4 rounded-lg flex items-center justify-center w-auto">إضافة المقرر</button>
-            <p v-if="sucsses" class="text-sm font-normal text-green-500 my-4 text-right md:text-center">{{sucsses}} - 
+            <p v-if="sucsses" class="text-sm font-normal text-green-500 my-4 text-right md:text-center">{{msg}} - 
             <router-link :to="{name : 'Welcome'}" class="font-bold">العودة للرئيسية</router-link>
             </p>
+            <p v-if="error" class="text-sm font-normal text-red-500 my-4 text-right md:text-center">{{msg}} - 
+            <router-link :to="{name : 'Welcome'}" class="font-bold">العودة للرئيسية</router-link>
+            </p>
+            <button type="submit" class="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-4 rounded-lg flex items-center justify-center w-auto">إضافة المقرر</button>
         </form>
     </div>
 </template>
@@ -77,7 +80,8 @@
                     specialty : [],
                 },
                 error : '',
-                sucsses : ''
+                sucsses : '',
+                msg : ''
             }
         },
         watch: {
@@ -141,9 +145,12 @@
             { headers: 
                 { Authorization : `Bearer ${sessionStorage.getItem("token")}`}}
             )
-            this.sucsses = "تم إضافة المقرر بنجاح"
+            this.sucsses = true,
+            this.msg = "تم إضافة المقرر بنجاح",
+            this.subjectData = []
         } catch(error) {
-            this.error = "حدث خطأ يرجى المحاولة مرة أخرى";
+            this.error = true,
+            this.msg = "حدث خطأ يرجى المحاولة مرة أخرى";
         }
     }
     }

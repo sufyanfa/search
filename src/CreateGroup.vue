@@ -40,7 +40,7 @@
                     </div>
                 </div>  
                 <div class="md:w-1/2 px-2 py-2 md:py-0">
-                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">
                         اختر المقرر
                     </label>
                     <div class="relative">
@@ -87,12 +87,13 @@
                 <label for="Gender" class="mr-2 block text-sm font-medium text-gray-700">الكل</label>
             </div>
             </div>
-            <button type="submit" class="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-4 rounded-lg flex items-center justify-center w-auto">إضافة القروب</button>
             <p v-if="sucsses" class="text-sm font-normal text-green-500 my-4 text-right md:text-center">{{msg}} - 
                 <router-link :to="{name : 'Welcome'}" class="font-bold">العودة للرئيسية</router-link>
             </p>
             <p v-if="error" class="text-sm font-normal text-red-500 my-4 text-right md:text-center">{{msg}} - 
             </p>
+            
+            <button type="submit" class="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-4 rounded-lg flex items-center justify-center w-auto">إضافة القروب</button>
         </form>
     </div>
 </template>
@@ -198,7 +199,8 @@
                 { Authorization : `Bearer ${sessionStorage.getItem("token")}`}}
             )
             this.sucsses = true,
-            this.msg = "تم إضافة القروب بنجاح"
+            this.msg = "تم إضافة القروب بنجاح",
+            this.groupData = []
         } catch(error) {
             this.error = true
             this.msg = "حدث خطأ يرجى المحاولة مرة أخرى";

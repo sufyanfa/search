@@ -56,72 +56,73 @@ components:{
             method: 'post',
             data: {
                 query: `
-                              query {
-                universities {
-                    data {
-                    id
-                    attributes {
-                        name
-                      groups{
-                        data{
-                          attributes{
-                            name,gender,url,division
-                            subject{
-                              data{
-                                attributes{
-                                  name
-                                }
-                              }
-                            }
-                            university{
-                              data{
-                                attributes{
-                                  name
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                      public_groups{
-                        data{
-                          attributes{
-                            name,gender,url
-                            university{
-                              data{
-                                attributes{
-                                  name
-                                }
-                              }
-                            }
-                            college{
-                              data{
-                                attributes{
-                                  name
-                                }
-                              }
-                            }
-                            specialty{
-                              data{
-                                attributes{
-                                  name
-                                }
-                              }
-                            }
-                            subject{
-                              data{
-                                attributes{
-                                  name
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                    }
+                query {
+  universities (sort : "id:desc"){
+      data {
+      id
+      attributes {
+          name
+        groups(sort : "id:desc"){
+          data{
+            attributes{
+              name,gender,url,division
+              subject{
+                data{
+                  attributes{
+                    name
+                  }
                 }
-              }`
+              }
+              university{
+                data{
+                  attributes{
+                    name
+                  }
+                }
+              }
+            }
+          }
+        }
+        public_groups(sort : "id:desc"){
+          data{
+            attributes{
+              name,gender,url
+              university{
+                data{
+                  attributes{
+                    name
+                  }
+                }
+              }
+              college{
+                data{
+                  attributes{
+                    name
+                  }
+                }
+              }
+              specialty{
+                data{
+                  attributes{
+                    name
+                  }
+                }
+              }
+              subject{
+                data{
+                  attributes{
+                    name
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      }
+  }
+}
+                `
             }
         })
 
