@@ -5,7 +5,7 @@ import axios from 'axios'
 import App from './App.vue'
 
 
-axios.defaults.baseURL = 'https://universitygroups.herokuapp.com/';
+axios.defaults.baseURL = import.meta.env.VITE_BACK_END_API;
 
 if(sessionStorage.getItem("token")){
     axios.get('/api/users/me',{
