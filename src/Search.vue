@@ -20,9 +20,9 @@
         إضافة قروب
       </router-link>
     </div>
+    <p class="text-sm text-sec mt-2">لايعد الموقع مسؤلاً عن المحتوى المتبادل في القروبات</p>
     <Groups v-if="select" :groups="groups" />
     <public-groups v-if="!select" :publicGroups="publicGroups" />
-    
   </div>
 </template>
 

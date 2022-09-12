@@ -116,8 +116,8 @@
                     name: '',
                     url : '',
                     division : '',
-                    subject: 0,
-                    university : 0,
+                    subject: [],
+                    university : [],
                     gender : 0
                 },
                 error : false,
@@ -135,6 +135,9 @@
             },
             specialtyID(value){
                 this.getSubjects()
+            },
+            subjectID(value){
+                this.groupData.subject = this.subjectID
             }
         },
         async mounted() { 

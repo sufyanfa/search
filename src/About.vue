@@ -44,7 +44,7 @@
         </div>
         <div class="w-full mx-auto text-center">
             <p class="text-xl text-gray-500 mb-4">للإستفسارات أو الإبلاغ عن قروب يرجى التواصل معنا</p>
-            <a href="mailto:admin@groupsedu.com?subject= - قروب الجامعة" class="px-4 py-3 bg-slate-900 hover:bg-slate-700 text-xs cursor-pointer text-white font-semibold rounded">التواصل معنا</a>
+            <a href="mailto:admin@groupsedu.com?subject= - قروبات الجامعة" class="px-4 py-3 bg-slate-900 hover:bg-slate-700 text-xs cursor-pointer text-white font-semibold rounded">التواصل معنا</a>
 
         </div>
     </div>
