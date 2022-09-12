@@ -45,7 +45,7 @@ components:{
     Groups,
     PublicGroups
 },
-    mounted() { 
+beforeMount() { 
         this.getPublicGroups()
     },
   methods: {
