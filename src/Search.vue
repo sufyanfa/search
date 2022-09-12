@@ -131,7 +131,6 @@ components:{
         this.publicGroups = response.data.data.universities.data[0].attributes.public_groups.data
 
         } catch (error) {
-            this.error = error;
         }
     }
   }

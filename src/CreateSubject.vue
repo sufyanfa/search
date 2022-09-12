@@ -79,8 +79,8 @@
                     code : '',
                     specialty : [],
                 },
-                error : '',
-                sucsses : '',
+                error : false,
+                sucsses :false,
                 msg : ''
             }
         },
@@ -145,12 +145,13 @@
             { headers: 
                 { Authorization : `Bearer ${sessionStorage.getItem("token")}`}}
             )
-            this.sucsses = true,
-            this.msg = "تم إضافة المقرر بنجاح",
+            this.sucsses = true
+            this.msg = "تم إضافة المقرر بنجاح"
             this.subjectData = []
         } catch(error) {
-            this.error = true,
-            this.msg = "حدث خطأ يرجى المحاولة مرة أخرى";
+            this.error = true
+            this.msg = "حدث خطأ يرجى المحاولة مرة أخرى"
+            this.subjectData = []
         }
     }
     }

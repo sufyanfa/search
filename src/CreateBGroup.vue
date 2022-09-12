@@ -43,7 +43,7 @@
               <p class="text-sm py-1">يرجى التحديد القروب خاص ب</p>
             <div class="-mx-3 md:flex mb-4">
                 <div class="md:w-1/2 px-2 py-2 md:py-0">
-                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">
                         اختر الجامعة 
                     </label>
                     <div class="relative">
@@ -54,7 +54,7 @@
                 </div>
                 
                 <div class="md:w-1/2 px-2 py-2 md:py-0">
-                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">
                         اختر الكلية
                     </label>
                     <div class="relative">
@@ -65,7 +65,7 @@
                 </div>  
 
                 <div class="md:w-1/2 px-2 py-2 md:py-0">
-                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">
                        اختر القسم
                     </label>
                     <div class="relative">
@@ -75,7 +75,7 @@
                     </div>
                 </div>  
                 <div class="md:w-1/2 px-2 py-2 md:py-0">
-                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">
                         اختر المقرر
                     </label>
                     <div class="relative">
@@ -104,19 +104,19 @@
                 specialties : [],
                 subjects : [],
 
-                universityID : 0,
-                collageID :0,
-                specialtyID :0,
-                subjectID : 0,
+                universityID : '',
+                collageID :'',
+                specialtyID :'',
+                subjectID : '',
 
                 groupData: {
                     name: '',
                     url : '',
-                    gender : 0,
+                    gender : '',
                     university : [],
-                    subject: [],
+                    college :[],
                     specialty : [],
-                    college : [],
+                    subject: [],
                 },
                 error : false,
                 sucsses : false,
@@ -161,7 +161,6 @@
         })
         this.universities = response.data.data.universities.data
         } catch (error) {
-            this.error = error;
         }
         },
         methods: {
@@ -187,7 +186,6 @@
                 method: 'get',
             }).then((result) => {
                 this.subjects = result.data.data.attributes.subjects.data
-                this.groupData.subject = this.subjectID
             })
         },
 
@@ -201,13 +199,14 @@
             { headers: 
                 { Authorization : `Bearer ${sessionStorage.getItem("token")}`}}
             )
-            this.sucsses = true,
-            this.msg = "تم إضافة القروب بنجاح",
+            this.sucsses = true
+            this.msg = "تم إضافة القروب بنجاح"
             this.groupData = []
 
         } catch(error) {
             this.error = true
-            this.msg = "حدث خطأ يرجى المحاولة مرة أخرى";
+            this.msg = "حدث خطأ يرجى المحاولة مرة أخرى"
+            this.groupData = []
         }
         }
     }

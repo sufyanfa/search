@@ -198,12 +198,13 @@
             { headers: 
                 { Authorization : `Bearer ${sessionStorage.getItem("token")}`}}
             )
-            this.sucsses = true,
-            this.msg = "تم إضافة القروب بنجاح",
+            this.sucsses = true
+            this.msg = "تم إضافة القروب بنجاح"
             this.groupData = []
         } catch(error) {
             this.error = true
-            this.msg = "حدث خطأ يرجى المحاولة مرة أخرى";
+            this.msg = "حدث خطأ يرجى المحاولة مرة أخرى"
+            this.groupData = []
         }
     }
     }
