@@ -21,7 +21,7 @@
       </router-link>
     </div>
     <p class="text-sm text-sec mt-2">لايعد الموقع مسؤلاً عن المحتوى المتبادل في القروبات</p>
-    <Groups v-if="select" :groups="groups" />
+    <Groups v-if="select" :groups="groups" :loading="loading" />
     <public-groups v-if="!select" :publicGroups="publicGroups" />
   </div>
 </template>
@@ -38,6 +38,7 @@ export default{
       universities : [],
       groups : [],
       publicGroups : [],
+      loading : true
     }
   },
 components:{
@@ -125,11 +126,10 @@ beforeMount() {
                 `
             }
         })
-
+        this.loading = false
         this.universities = response.data.data.universities.data
         this.groups= response.data.data.universities.data[0].attributes.groups.data
         this.publicGroups = response.data.data.universities.data[0].attributes.public_groups.data
-
         } catch (error) {
         }
     }

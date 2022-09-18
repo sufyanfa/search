@@ -28,7 +28,10 @@
                         <tbody class="text-sm divide-y text-right divide-gray-100">
                             <tr v-for="group in filteredPublicGroups" :key="group.id">
                                 <td class="p-2 whitespace-nowrap">
-                                    <a class="font-medium text-blue-500 hover:text-blue-700" :href="group.attributes.url">
+                                    <a class="font-medium text-blue-500 hover:text-blue-700" v-if="startsWithNumber(group.attributes.url)" :href="`https://wa.me/${group.attributes.url}?text=اود الانضمام لقروب ${group.attributes.name}`">
+                                        {{group.attributes.name}}
+                                    </a>
+                                    <a class="font-medium text-blue-500 hover:text-blue-700" v-else :href="group.attributes.url">
                                         {{group.attributes.name}}
                                     </a>
                                 </td>
@@ -68,6 +71,11 @@ export default {
       return this.publicGroups.filter(group => {
         return group.attributes.name.toLowerCase().includes(this.search.toLowerCase())
       })
+    }
+  },
+  methods : {
+    startsWithNumber : function(str){
+        return /^\d/.test(str);
     }
   }
 }

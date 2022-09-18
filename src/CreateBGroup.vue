@@ -19,10 +19,11 @@
             </div>
             <div class="-mx-3 md:flex mb-4">
                 <div class="md:w-full px-3">
-                <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-password">
+                <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">
                     رابط القروب
                 </label>
-                <input required v-model="groupData.url" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4 mb-3" id="grid-password" type="text" placeholder="ألصق رابط القروب">
+                <input required v-model="groupData.url" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" type="text" placeholder="ألصق رابط القروب أو رقم الجوال (512345678)">
+                <p class="text-sm text-gray-600 p-2">لإضافة قروب خاص يرجى كتابة رقم مشرف القروب</p>
                 </div>
             </div>
             <p class="text-xs font-bold mb-2">القروب متاح لل</p>

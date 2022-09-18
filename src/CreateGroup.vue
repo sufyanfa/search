@@ -57,7 +57,7 @@
                     </label>
                     <input required v-model="groupData.name" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4" type="text" placeholder="ادخل اسم القروب">
                 </div>
-                <div class="md:w-1/2 px-3">
+                <div class="md:w-1/2 px-3 mt-4 md:mt-0">
                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
                     رقم الشعبة
                 </label>
@@ -69,7 +69,8 @@
                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">
                     رابط القروب
                 </label>
-                <input required v-model="groupData.url" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" type="text" placeholder="ألصق رابط القروب">
+                <input required v-model="groupData.url" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" type="text" placeholder="ألصق رابط القروب أو رقم الجوال (512345678)">
+                <p class="text-sm text-gray-600 p-2">لإضافة قروب خاص يرجى كتابة رقم مشرف القروب</p>
                 </div>
             </div>
             <p class="text-xs font-bold mb-2">القروب متاح لل</p>
@@ -92,7 +93,6 @@
             </p>
             <p v-if="error" class="text-sm font-normal text-red-500 my-4 text-right md:text-center">{{msg}} - 
             </p>
-            
             <button type="submit" class="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-4 rounded-lg flex items-center justify-center w-auto">إضافة القروب</button>
         </form>
     </div>
